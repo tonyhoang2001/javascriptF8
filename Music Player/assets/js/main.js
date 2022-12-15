@@ -12,6 +12,7 @@ const progress = $('#progress')
 const next = $('.btn-next')
 const previous = $('.btn-prev')
 const shuffle = $('.btn-random')
+const repeat = $('.btn-repeat')
 
 
 const songs = [
@@ -70,10 +71,11 @@ const app = {
     currentIndex: 4,
     isPlaying: false,
     isRandom: false,
+    isRepeat: false,
     render: function () {
-        const htmls = songs.map(song => {
+        const htmls = songs.map((song, index) => {
             return `
-                <div class="song">
+                <div class="song ${index === this.currentIndex ? 'active' : ''}">
                     <div class="thumb" style="background-image: url('${song.image}')">
                     </div>
 
@@ -163,8 +165,8 @@ const app = {
             } else {
                 _this.nextSong()
             }
-
             audio.play()
+            _this.render()
         }
 
         // Xử lý khi back bài hát trước
@@ -176,6 +178,7 @@ const app = {
             }
 
             audio.play()
+            _this.render()
         }
 
         // Xử lý khi shuffle bài hát
@@ -186,8 +189,22 @@ const app = {
 
         // Xử lý audio ended
         audio.onended = function () {
-            next.click()
+            if (_this.isRepeat) {
+                audio.play()
+            } else {
+                next.click()
+            }
+            _this.render()
         }
+
+        // Xử lý khi repeat bài hát
+        repeat.onclick = function () {
+            repeat.classList.toggle('active')
+            _this.isRepeat = !_this.isRepeat
+        }
+    },
+
+    scrollToActiveSong: function () {
 
     },
 
