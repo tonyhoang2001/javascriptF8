@@ -18,6 +18,10 @@ html {
     font-family: "Poppins", sans-serif;
 }
 
+.btn:hover {
+    cursor: pointer;
+}
+
 .player {
     position: relative;
     max-width: 480px;

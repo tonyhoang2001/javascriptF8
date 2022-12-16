@@ -72,6 +72,7 @@ const app = {
     isPlaying: false,
     isRandom: false,
     isRepeat: false,
+    
     render: function () {
         const htmls = songs.map((song, index) => {
             return `
@@ -92,6 +93,7 @@ const app = {
         })
         $('.playlist').innerHTML = htmls.join('')
     },
+
     defineProperties: function () {
         Object.defineProperty(this, 'currentSong', {
             get: function () {
@@ -99,6 +101,7 @@ const app = {
             }
         })
     },
+
     handleEvent: function () {
         const _this = this
         const cdWidth = cd.offsetWidth
