@@ -13,7 +13,7 @@ const next = $('.btn-next')
 const previous = $('.btn-prev')
 const shuffle = $('.btn-random')
 const repeat = $('.btn-repeat')
-
+const playlist = $('.playlist')
 
 const songs = [
     {
@@ -91,7 +91,7 @@ const app = {
                 </div>
             `
         })
-        $('.playlist').innerHTML = htmls.join('')
+        playlist.innerHTML = htmls.join('')
     },
 
     defineProperties: function () {
@@ -170,6 +170,7 @@ const app = {
             }
             audio.play()
             _this.render()
+            _this.scrollToActiveSong()
         }
 
         // Xử lý khi back bài hát trước
@@ -182,6 +183,7 @@ const app = {
 
             audio.play()
             _this.render()
+            _this.scrollToActiveSong()
         }
 
         // Xử lý khi shuffle bài hát
@@ -208,7 +210,15 @@ const app = {
     },
 
     scrollToActiveSong: function () {
-
+        setTimeout(
+            () => {
+                $('.song.active').scrollIntoView({
+                    behavior:'smooth',
+                    block: 'center',
+                })
+            },
+            300
+        )
     },
 
     loadCurrentSong: function () {
